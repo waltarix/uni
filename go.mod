@@ -14,3 +14,5 @@ require (
 	golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1 // indirect
 	golang.org/x/term v0.0.0-20220411215600-e5f449aeb171 // indirect
 )
+
+replace github.com/mattn/go-runewidth => github.com/waltarix/go-runewidth v0.0.13-custom-r5
