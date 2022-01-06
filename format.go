@@ -15,6 +15,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
+	"github.com/mattn/go-runewidth"
 	"zgo.at/termtext"
 	"zgo.at/uni/v2/unidata"
 	"zgo.at/zli"
@@ -670,8 +671,8 @@ func tabOrSpace() string {
 }
 
 func widePadding(info unidata.Codepoint) string {
-	if info.Width() != unidata.WidthFullWidth && info.Width() != unidata.WidthWide {
-		return " "
+	if runewidth.RuneWidth(info.Codepoint) == 2 {
+		return ""
 	}
-	return ""
+	return " "
 }

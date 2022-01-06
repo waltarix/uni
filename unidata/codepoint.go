@@ -8,7 +8,7 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	"zgo.at/runewidth"
+	"github.com/mattn/go-runewidth"
 )
 
 type (
