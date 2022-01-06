@@ -8,7 +8,7 @@ import (
 	"unicode/utf16"
 	"unicode/utf8"
 
-	"zgo.at/runewidth"
+	"github.com/mattn/go-runewidth"
 )
 
 type (
@@ -273,6 +273,9 @@ func (c Codepoint) Display() string {
 		}
 	// "Other, Format" category except the soft hyphen and spaces.
 	case c.category != CatPrivateUse && !c.isPrint() && cp != 0x00ad && c.Category() != CatSpaceSeparator:
+		if 0xf500 <= cp && cp <= 0xfd46 {
+			break
+		}
 		cp = 0x2423
 	}
 

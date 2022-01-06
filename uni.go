@@ -274,7 +274,7 @@ Format:
 `)
 
 const (
-	defaultFormat  = "%(char q h l:3)%(wide_padding) %(cpoint h l:7) %(dec l:6) %(utf8 l:11) %(html l:10) %(name t) %(aliases t h Q:[:])"
+	defaultFormat  = "%(char q h l:3)%(wide_padding) %(cpoint h l:7) %(dec l:6) %(utf8 l:11) %(html l:10) %(cells l:6) %(name t) %(aliases t h Q:[:])"
 	defaultCompact = "%(char q h l:3)%(wide_padding) %(cpoint h l:7) %(name t l:auto)"
 	allFormat      = "%(char q h l:3)%(wide_padding) %(cpoint h l:auto) %width %cells %dec %hex %oct %bin" +
 		" %utf8 %utf16le %utf16be %html %xml %json %keysym %digraph %name %plane %cat %block" +
@@ -728,11 +728,7 @@ func identify(ins []string, format string, raw bool, as printAs) error {
 	}
 
 	for _, c := range in {
-		info, ok := unidata.Find(c)
-		if !ok {
-			return fmt.Errorf("unknown codepoint: U+%.4X", c) // Should never happen.
-		}
-
+		info, _ := unidata.Find(c)
 		f.Line(f.toLine(info, raw))
 	}
 	f.Print(zli.Stdout)
