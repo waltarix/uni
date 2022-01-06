@@ -1,6 +1,6 @@
 module zgo.at/uni/v2
 
-go 1.17
+go 1.21
 
 require (
 	github.com/mattn/go-runewidth v0.0.15
@@ -10,7 +10,9 @@ require (
 )
 
 require (
-	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/rivo/uniseg v0.4.4 // indirect
 	golang.org/x/sys v0.14.0 // indirect
 	golang.org/x/term v0.14.0 // indirect
 )
+
+replace github.com/mattn/go-runewidth => github.com/waltarix/go-runewidth v0.0.15-custom

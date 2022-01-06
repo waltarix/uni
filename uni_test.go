@@ -218,6 +218,10 @@ func TestPrint(t *testing.T) {
 		{[]string{"-q", "p", "U+DB80"}, "<Private Use High Surrogate, First>", 1, -1},     // <Private Use High Surrogate> (First)
 		{[]string{"-q", "p", "U+DB81"}, "<Private Use High Surrogate>", 1, -1},            // <Private Use High Surrogate>
 		{[]string{"-q", "p", "U+DBFF"}, "<Private Use High Surrogate, Last>", 1, -1},      // <Private Use High Surrogate> (Last)
+
+		// Nerd Fonts
+		{[]string{"-q", "p", "FB3F"}, "'﬿'", 1, -1},
+		{[]string{"-q", "p", "FB3F"}, "CODEPOINT NOT IN UNICODE", 1, -1},
 	}
 
 	for _, tt := range tests {
@@ -387,6 +391,7 @@ func TestJSON(t *testing.T) {
 	"block": "Currency Symbols",
 	"cat": "Currency_Symbol",
 	"char": "€",
+	"cjk_width": "2",
 	"cpoint": "U+20AC",
 	"dec": "8364",
 	"digraph": "=e",

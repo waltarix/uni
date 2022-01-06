@@ -229,6 +229,7 @@ Format:
         %(plane)         Plane name                    Basic Multilingual Plane
         %(width)         Character width               Narrow
         %(unicode)       First assigned in Unicode     1.1
+        %(cjk_width)     Character width as a number   1
         %(wide_padding)  Blank for wide characters,
                          space otherwise; for alignment
 
@@ -250,10 +251,11 @@ Format:
 `)
 
 const (
-	defaultFormat = "%(char q l:3)%(wide_padding) %(cpoint l:7) %(dec l:6) %(utf8 l:11) %(html l:10) %(name t) (%(cat t))"
+	defaultFormat = "%(char q l:3)%(wide_padding) %(cpoint l:7) %(dec l:6) %(utf8 l:11) %(html l:10) %(cjk_width l:10) %(name t) (%(cat t))"
 	allFormat     = "%(char q l:3)%(wide_padding) %(cpoint l:auto) %(width l:auto) %(dec l:auto) %(hex l:auto)" +
 		" %(oct l:auto) %(bin l:auto)" +
 		" %(utf8 l:auto) %(utf16le l:auto) %(utf16be l:auto) %(html l:auto) %(xml l:auto) %(json l:auto)" +
+		" %(cjk_width l:auto)" +
 		" %(keysym l:auto) %(digraph l:auto) %(name l:auto) %(plane l:auto) %(cat l:auto) %(block l:auto)" +
 		" %(script l:auto) %(props l:auto) %(unicode l:auto)"
 
@@ -675,11 +677,7 @@ func identify(ins []string, format string, raw bool, as printAs) error {
 	}
 
 	for _, c := range in {
-		info, ok := unidata.Find(c)
-		if !ok {
-			return fmt.Errorf("unknown codepoint: U+%.4X", c) // Should never happen.
-		}
-
+		info, _ := unidata.Find(c)
 		f.Line(f.toLine(info, raw))
 	}
 	f.Print(zli.Stdout)

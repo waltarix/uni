@@ -67,14 +67,14 @@ mk() {
 }
 
 mkdir -p .cache
-get 'https://www.unicode.org/Public/UCD/latest/ucd/Blocks.txt'
-get 'https://www.unicode.org/Public/UCD/latest/ucd/DerivedAge.txt'
-get 'https://www.unicode.org/Public/UCD/latest/ucd/EastAsianWidth.txt'
-get 'https://www.unicode.org/Public/UCD/latest/ucd/PropList.txt'
-get 'https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt'
-get 'https://www.unicode.org/Public/UCD/latest/ucd/Scripts.txt'
-get 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt'
-get 'https://www.unicode.org/Public/emoji/14.0/emoji-test.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/Blocks.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/DerivedAge.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/EastAsianWidth.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/PropList.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/PropertyValueAliases.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/Scripts.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/UnicodeData.txt'
+get 'https://www.unicode.org/Public/15.1.0/ucd/emoji/emoji-test.txt'
 get 'https://html.spec.whatwg.org/entities.json'
 get 'https://gitlab.freedesktop.org/xorg/proto/xorgproto/-/raw/master/include/X11/keysymdef.h'
 get 'https://tools.ietf.org/rfc/rfc1345.txt'

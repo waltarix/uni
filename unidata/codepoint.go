@@ -7,6 +7,8 @@ import (
 	"strings"
 	"unicode/utf16"
 	"unicode/utf8"
+
+	"github.com/mattn/go-runewidth"
 )
 
 type (
@@ -265,6 +267,9 @@ func (c Codepoint) Display() string {
 		}
 	// "Other, Format" category except the soft hyphen and spaces.
 	case c.category != CatPrivateUse && !c.isPrint() && cp != 0x00ad && c.Category() != CatSpaceSeparator:
+		if 0xf500 <= cp && cp <= 0xfd46 {
+			break
+		}
 		cp = 0x2423
 	}
 
@@ -276,6 +281,8 @@ func (c Codepoint) Name() string { return c.name }
 
 // Width gets this codepoint's width.
 func (c Codepoint) Width() Width { return c.width }
+
+func (c Codepoint) CJKWidth() string { return strconv.Itoa(runewidth.RuneWidth(c.Codepoint)) }
 
 // Category gets this codepoint's category.
 func (c Codepoint) Category() Category { return c.category }
