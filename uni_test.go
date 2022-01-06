@@ -172,6 +172,10 @@ func TestPrint(t *testing.T) {
 		{[]string{"-q", "p", "utf8:e2 82 ac"}, "'€'", 1, -1},
 		{[]string{"-q", "p", "utf8:0xe20x820xac"}, "'€'", 1, -1},
 		{[]string{"-q", "p", "utf8:0xE2 0x82 0xAC"}, "'€'", 1, -1},
+
+		// Nerd Fonts
+		{[]string{"-q", "p", "FB3F"}, "'﬿'", 1, -1},
+		{[]string{"-q", "p", "FB3F"}, "CODEPOINT NOT IN UNICODE", 1, -1},
 	}
 
 	for _, tt := range tests {
@@ -340,6 +344,7 @@ func TestJSON(t *testing.T) {
 	"block": "Currency Symbols",
 	"cat": "Currency_Symbol",
 	"char": "€",
+	"cjk_width": "2",
 	"cpoint": "U+20AC",
 	"dec": "8364",
 	"digraph": "=e",

@@ -17,6 +17,8 @@ import (
 	"zgo.at/uni/v2/unidata"
 	"zgo.at/zli"
 	"zgo.at/zstd/zstring"
+
+	"github.com/mattn/go-runewidth"
 )
 
 var termWidth = func() int {
@@ -334,7 +336,7 @@ func (f *Format) String() string {
 
 var knownColumns = []string{"char", "wide_padding", "cpoint", "dec", "hex",
 	"oct", "bin", "utf8", "utf16be", "utf16le", "html", "xml", "json", "keysym",
-	"digraph", "name", "cat", "block", "plane", "width"}
+	"digraph", "name", "cat", "block", "plane", "width", "cjk_width"}
 
 func toLine(info unidata.Codepoint, raw bool) map[string]string {
 	// TODO: would be better to include only the columns that are actually used.
@@ -359,6 +361,7 @@ func toLine(info unidata.Codepoint, raw bool) map[string]string {
 		"block":        info.Block(),
 		"plane":        info.Plane(),
 		"width":        info.WidthName(),
+		"cjk_width":    info.CJKWidth(),
 	}
 }
 
@@ -384,8 +387,8 @@ func tabOrSpace() string {
 }
 
 func widePadding(info unidata.Codepoint) string {
-	if info.Width != unidata.WidthFullWidth && info.Width != unidata.WidthWide {
-		return " "
+	if runewidth.RuneWidth(info.Codepoint) == 2 {
+		return ""
 	}
-	return ""
+	return " "
 }

@@ -13,6 +13,8 @@ import (
 	"unicode/utf8"
 
 	"zgo.at/zstd/zstring"
+
+	"github.com/mattn/go-runewidth"
 )
 
 const UnknownCodepoint = "CODEPOINT NOT IN UNICODE"
@@ -154,6 +156,10 @@ func (c Codepoint) WidthName() string {
 	return WidthNames[c.Width]
 }
 
+func (c Codepoint) CJKWidth() string {
+	return strconv.Itoa(runewidth.RuneWidth(c.Codepoint))
+}
+
 func (c Codepoint) Category() string {
 	return Catnames[c.Cat]
 }
@@ -233,7 +239,11 @@ func (c Codepoint) Repr(raw bool) string {
 			cp = 0x2423
 		}
 	// "Other, Format" category except the soft hyphen and spaces.
-	case !unicode.IsPrint(cp) && cp != 0x00ad && !unicode.In(cp, unicode.Zs):
+	case !unicode.IsPrint(cp) && cp != 0x00ad && !unicode.In(cp, unicode.Zs) && !unicode.In(cp, unicode.Co):
+		// Nerd Fonts (Material)
+		if 0xf500 <= cp && cp <= 0xfd46 {
+			break
+		}
 		cp = 0xfffd
 	}
 
