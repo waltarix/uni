@@ -85,6 +85,8 @@ func header(h string) string {
 		return strings.ToUpper(h)
 	case "cpoint":
 		return "CPoint"
+	case "cjk_width":
+		return "CJK_Width"
 	default:
 		return zstring.UpperFirst(h)
 	}
@@ -466,7 +468,7 @@ func (f *Format) String() string {
 
 var knownColumns = []string{"char", "wide_padding", "cpoint", "dec", "hex",
 	"oct", "bin", "utf8", "utf16be", "utf16le", "html", "xml", "json", "keysym",
-	"digraph", "name", "cat", "block", "plane", "width", "props"}
+	"digraph", "name", "cat", "block", "plane", "width", "props", "cjk_width"}
 
 func (f *Format) toLine(info unidata.Codepoint, raw bool) map[string]string {
 	if f.tbl() {
@@ -496,6 +498,7 @@ func (f *Format) toLine(info unidata.Codepoint, raw bool) map[string]string {
 			"block":        info.Block().String(),
 			"plane":        info.Plane().String(),
 			"width":        info.Width().String(),
+			"cjk_width":    info.CJKWidth(),
 			"props":        info.Properties().String(),
 		}
 	}
@@ -568,6 +571,9 @@ func (f *Format) toLine(info unidata.Codepoint, raw bool) map[string]string {
 	if zstring.Contains(f.colNames, "width") {
 		cols["width"] = info.Width().String()
 	}
+	if zstring.Contains(f.colNames, "cjk_width") {
+		cols["cjk_width"] = info.CJKWidth()
+	}
 	if zstring.Contains(f.colNames, "props") {
 		cols["props"] = info.Properties().String()
 	}
@@ -596,8 +602,8 @@ func tabOrSpace() string {
 }
 
 func widePadding(info unidata.Codepoint) string {
-	if info.Width() != unidata.WidthFullWidth && info.Width() != unidata.WidthWide {
-		return " "
+	if runewidth.RuneWidth(info.Codepoint) == 2 {
+		return ""
 	}
-	return ""
+	return " "
 }

@@ -1,0 +1,38 @@
+---
+project_name: uni
+
+before:
+  hooks:
+    - go mod download
+
+builds:
+  - binary: uni
+    targets:
+      - linux_amd64_v4
+      - darwin_amd64_v3
+      - darwin_arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s
+      - -w
+      - -X main.version={{ .RawVersion }}{{ if .Prerelease }}-{{ .Prerelease }}{{ end }}
+    env:
+      - CGO_ENABLED=0
+
+archives:
+  - name_template: "{{ .ProjectName }}-{{ .RawVersion }}-{{ .Os }}_{{ .Arch }}"
+    format: tar.xz
+    wrap_in_directory: true
+    rlcp: true
+    files:
+      - none*
+
+snapshot:
+  name_template: "{{ .Tag }}-devel"
+
+checksum:
+  disable: true
+
+changelog:
+  skip: true
