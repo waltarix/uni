@@ -191,10 +191,10 @@ func TestPrint(t *testing.T) {
 
 		{[]string{"-q", "p", "U+3402"}, "'㐂'", 1, -1},
 		{[]string{"-q", "p", "U+3402..U+3404"}, "<CJK Ideograph Extension A>", 3, -1},
-		{[]string{"-q", "p", "OtherPunctuation"}, "ASTERISM", 640, -1},
-		{[]string{"-q", "p", "Po"}, "ASTERISM", 640, -1},
+		{[]string{"-q", "p", "OtherPunctuation"}, "ASTERISM", 641, -1},
+		{[]string{"-q", "p", "Po"}, "ASTERISM", 641, -1},
 		{[]string{"-q", "p", "GeneralPunctuation"}, "ASTERISM", 111, -1},
-		{[]string{"-q", "p", "all"}, "ASTERISM", 40116, -1},
+		{[]string{"-q", "p", "all"}, "ASTERISM", 40575, -1},
 
 		{[]string{"-q", "-r", "p", "U9"}, "'\t'", 1, -1},
 
@@ -389,7 +389,7 @@ func TestJSON(t *testing.T) {
 	"bin":     "10000010101100",
 	"block":   "Currency Symbols",
 	"cat":     "Currency_Symbol",
-	"cells":   "1",
+	"cells":   "2",
 	"char":    "€",
 	"cpoint":  "U+20AC",
 	"dec":     "8364",
