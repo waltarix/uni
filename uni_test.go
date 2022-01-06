@@ -340,6 +340,7 @@ func TestJSON(t *testing.T) {
 	"block": "Currency Symbols",
 	"cat": "Currency_Symbol",
 	"char": "€",
+	"cjk_width": "2",
 	"cpoint": "U+20AC",
 	"dec": "8364",
 	"digraph": "=e",
